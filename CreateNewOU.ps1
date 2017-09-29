@@ -1,16 +1,2 @@
-param(
-$AdminUsername,
-$AdminPassword
-)
+New-ADOrganizationalUnit -Name test1 -Path $oupath 'dc=testmdv, dc=nl'
 
-$password = ConvertTo-SecureString $Adminpassword -AsPlainText -Force
-$credential = new-object System.Management.Automation.PSCredential($adminUsername, $password)
-
-Invoke-Command -Credential $credential -ComputerName $env:COMPUTERNAME -ArgumentList $PSScriptRoot -ScriptBlock {
-  param 
-  (
-    $workingDir
-  )
-
-New-ADOrganizationalUnit -Name test -Path $oupath 'dc=testmdv, dc=nl'
-}
